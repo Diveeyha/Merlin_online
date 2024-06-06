@@ -105,8 +105,7 @@ def load_model(tf_model):
 
     # Load TFLite model and allocate tensors.
     model_path = 'https://raw.githubusercontent.com/Diveeyha/Merlin_online/main/model/' + tf_model + '.tflite'
-    model = requests.get(model_path)
-    myinterpreter = tf.lite.Interpreter(model_path=model)
+    myinterpreter = tf.lite.Interpreter(model_path=model_path)
     myinterpreter.allocate_tensors()
 
     # Get input and output tensors.
