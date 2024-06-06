@@ -1,37 +1,7 @@
-# How to use:
-#
-# 1. Extract the models from the Merlin Android App.
-#     - First, you need to get the APK for the Merlin app. This can be done using a variety of methods,
-#     the easiest way is to use adb and an android device connected to your computer
-#     (https://stackoverflow.com/questions/4032960/how-do-i-get-an-apk-file-from-an-android-device).
-#     It may be possible to use Bluestacks to access downloaded APK files, but honestly not sure.
-#     Just be careful as there are some sketchy websites that claim to provide the APK file but pretty
-#     sure many of them are not real. One website downloaded a ~500MB file for Merlin, which should only be ~100MB
-#
-# 2. Use APKTool (https://apktool.org/) to decompile the APK file. Inside the assets folder in the decompiled app,
-#    you should find a bunch of .tflite files. The following files should be moved from the assets folder to be siblings
-#    with this script:
-#     - sound_id_v31.tflite (Sound ID)
-#     - msid685v4_spectrogram.tflite (Spectrogram Generation)
-#     - geo_v31.tflite (Frequency based on location)
-# 3. Make sure that your audio is in .wav form. This is the only form that the script accepts, currently.
 # 4. Verify that you have python installed with the following packages:
 #     - numpy
 #     - tensorflow
 #     - librosa
-#
-# 5. Call the script with the following arguments:
-#     - Filepath to the input wav file
-#     - Detection Threshold. This is a value between 0 and 1 that is the confidence threshold for outputting results
-#    The following arguments are optional (for filtering out unlikely results based on location):
-#     - Latitude
-#     - Longitude
-#     - Week of the year (0-52, I believe?)
-#
-#    An output file will be generated called output.log with all of your detections
-#
-# Example call to program:
-#    python classifyAudio.py audioToClassify.wav 0.5 37.271 -76.717 5.3
 
 import streamlit as st
 import pandas as pd
@@ -138,7 +108,7 @@ def load_model(tf_model):
     print(f'LOADING TF LITE {tf_model} MODEL...', end=' ')
 
     # Load TFLite model and allocate tensors.
-    model_path = userDir + '/PycharmProjects/pythonProject/BirdNET-Pi-main/model/' + tf_model + '.tflite'
+    model_path = 'https://raw.githubusercontent.com/Diveeyha/Merlin_online/main/model/' + tf_model + '.tflite'
     myinterpreter = tf.lite.Interpreter(model_path=model_path)
     myinterpreter.allocate_tensors()
 
